@@ -10,8 +10,8 @@ def extract_text_from_pdf(pdf_path):
             text = text + page.extract_text() + "\n"
     return text.strip()
 
-path="Pari_Ranasaria_Resume.pdf"
-extract_text_from_pdf(path)
+# path="Pari_Ranasaria_Resume.pdf"
+# extract_text_from_pdf(path)
 
 API_KEY = "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"
 
