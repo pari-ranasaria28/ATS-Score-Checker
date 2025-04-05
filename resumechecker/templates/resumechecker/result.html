@@ -1,0 +1,168 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Resume Analysis Result</title>
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            background: #f1f1f1;
+        }
+        .badge {
+            font-size: 14px;
+            margin: 2px;
+        }
+        .back-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center text-primary">🚀 ATS Resume Analysis Result</h2>
+        <hr>
+
+        <!-- Job Title -->
+        <h4 class="text-dark"><strong>Job Title:</strong> {{ selected_job_title }}</h4>
+
+        <!-- Rank -->
+        <div class="card p-3 my-3">
+            <h5 class="text-success">📊 ATS Score: <strong>{{ resume_data.rank }}%</strong></h5>
+        </div>
+
+        <!-- Skills -->
+        <div class="card p-3 my-3">
+            <h5>🛠️ Skills Identified:</h5>
+            {% for skill in resume_data.skills %}
+                <span class="badge bg-primary">{{ skill }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Total Experience -->
+        <div class="card p-3 my-3">
+            <h5>⏳ Total Experience:</h5>
+            <p class="text-dark">{{ resume_data.total_experience }} years</p>
+        </div>
+
+        <!-- Project Categories -->
+        <div class="card p-3 my-3">
+            <h5>📁 Project Categories:</h5>
+            {% for category in resume_data.project_category %}
+                <span class="badge bg-secondary">{{ category }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Back Button -->
+        <div class="back-btn">
+            <a href="{% url 'home' %}" class="btn btn-outline-primary">⬅️Upload another Resume</a>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume ATS Score Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .progress {
+            height: 8px;
+            margin-top: 10px;
+        }
+        .badge {
+            font-size: 14px;
+            margin: 3px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h4 class="text-center">📊 Resume ATS Score Result</h4>
+
+    <!-- Selected Job Title -->
+    <p><strong>Selected Job Description:</strong> {{ selected_job_title }}</p>
+
+    <!-- Uploaded Resume -->
+    <p><strong>Uploaded Resume:</strong>
+        {% if resume_uploaded_url %}
+    <a href="{{ resume_uploaded_url }}" class="btn btn-success" download>📄{{resume_uploaded_name}}</a>
+{% endif %}
+    
+    </p>
+
+
+    <!-- Upload Progress -->
+    <p>Uploading: 100%</p>
+    <div class="progress">
+        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <!-- Rank & Experience -->
+    <p class="section-title">Rank: <span class="text-warning fw-bold">{{ resume_data.rank }}</span></p>
+    <p><strong>Total Experience:</strong> {{ resume_data.total_experience }} years</p>
+
+    <!-- Skills -->
+    <p class="section-title">Skills:</p>
+    <div>
+        {% for skill in resume_data.skills %}
+            <span class="badge bg-secondary">{{ skill }}</span>
+        {% endfor %}
+    </div>
+
+    <!-- Project Categories -->
+    <p class="section-title">Project Categories:</p>
+    <div>
+        {% for category in resume_data.project_category %}
+            <span class="badge bg-dark">{{ category }}</span>
+        {% endfor %}
+    </div>
+
+    <br>
+    <a href="{% url 'home' %}" class="btn btn-primary">⬅️ Upload Another Resume</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
